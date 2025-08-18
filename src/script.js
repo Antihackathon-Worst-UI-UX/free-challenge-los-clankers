@@ -54,7 +54,9 @@ function nextRound() {
     music_clear.play().catch(err => console.log("Autoplay blocked:", err));
     // Redirect to rickroll
     setTimeout(() => {
-      window.location.href = "https://www.youtube.com/watch?v=9vOjPTcwDB8"; // Also "http://www.patience-is-a-virtue.org/" or "https://www.youtube.com/watch?v=b4XpMTUlorc"
+      window.location.href = /*"https://www.youtube.com/watch?v=9vOjPTcwDB8"
+       "http://www.patience-is-a-virtue.org/" */
+     "https://www.youtube.com/watch?v=b4XpMTUlorc"; 
     }, 3000);
     return;
   }
