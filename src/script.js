@@ -54,10 +54,10 @@ function nextRound() {
     music_clear.play().catch(err => console.log("Autoplay blocked:", err));
     // Redirect to rickroll
     setTimeout(() => {
-      window.location.href = /*"https://www.youtube.com/watch?v=9vOjPTcwDB8"
+      window.location.href = /*"https://www.youtube.com/watch?v=9vOjPTcwDB8" Asi es como la tecnologia esta avanzando 
        "http://www.patience-is-a-virtue.org/" */
      "https://www.youtube.com/watch?v=b4XpMTUlorc"; 
-    }, 3000);
+    }, 2500);
     return;
   }
 
