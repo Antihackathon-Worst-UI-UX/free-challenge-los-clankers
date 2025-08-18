@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wanted! - Bad UI Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<audio id="bgm" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<audio id="bgm_clear">
+  <source src="music_clear.mp3" type="audio/mpeg">
+</audio>
+<body>
+  <h1> Wanted! (DCChaotic UI)</h1>
+
+  <div id="loginScreen">
+    <h2>Login</h2>
+    <input type="text" placeholder="Username"><br>
+    <input type="password" placeholder="Password"><br>
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <div id="posterScreen" style="display:none;">
+    <h2> 
+        <img src="alarm.gif" alt="Alarm" style="width: 50px; height: 50px;">
+        WANTED 
+        <img src="alarm.gif" alt="Alarm" style="width: 50px; height: 50px;">
+    </h2>
+    <p>Encuentra este botón:</p>
+    <button id="posterBtn">LOGIN</button>
+    <br><br>
+    <button id="posterContinue">Continue</button>
+  </div>
+
+  <div id="gameScreen" style="display:none;">
+    <p id="message"></p>
+    <div id="game"></div>
+  </div>
+
+  <!-- Background music -->
+  <audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

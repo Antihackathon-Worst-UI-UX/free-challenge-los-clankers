@@ -1,0 +1,23 @@
+body {
+  font-family: Comic Sans MS, sans-serif;
+  text-align: center;
+  background: #ffefc1;
+}
+
+#game {
+  position: relative;
+  margin: 20px auto;
+  width: 600px;
+  height: 500px;
+  border: 3px dashed red;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#loginBtn {
+  position: relative;
+}
