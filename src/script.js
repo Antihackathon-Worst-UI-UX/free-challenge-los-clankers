@@ -73,7 +73,7 @@ function nextRound() {
   }
 
   let numButtons = // 4 then 16 then 25
-    round == 1 ? 4 : round == 2 ? 16 : 25 + (round - 3) * 8;
+    round == 1 ? 4 : round == 2 ? 16 : 25 + (round - 3) * 5;
   let targetIndex = Math.floor(Math.random() * numButtons);
 
   for (let i = 0; i < numButtons; i++) {
