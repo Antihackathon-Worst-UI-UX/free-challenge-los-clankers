@@ -16,9 +16,20 @@ loginBtn.addEventListener("mouseover", () => {
     loginBtn.style.transition = "all 0.5s ease-in-out";
     loginBtn.style.transform = "translateY(-100px)"; // Move up
     loginBtn.style.opacity = "0"; // Fade out
+    // Show the "Desapareció" message
+    const msg = document.createElement("div");
+    msg.textContent = "Desapareció!";
+    msg.style.position = "absolute";
+    msg.style.fontSize = "24px";
+    msg.style.top = "50%";
+    msg.style.left = "50%";
+    msg.style.transform = "translate(-50%, -50%)";
+    msg.style.color = "red";
+    loginScreen.appendChild(msg);
   // After it leaves the screen, switch to poster
   setTimeout(() => {
     loginScreen.style.display = "none";
+    loginScreen.removeChild(msg); // Remove the message
     posterScreen.style.display = "block";
   }, 2200); // a bit longer than transition time
 });
@@ -48,7 +59,7 @@ function nextRound() {
   game.innerHTML = "";
   msg.textContent = `Round ${round}`;
 
-  if (round > 10) {
+  if (round > 12) {
     msg.textContent = "Access Granted!";
     music.pause();
     music_clear.play().catch(err => console.log("Autoplay blocked:", err));
@@ -75,6 +86,7 @@ function nextRound() {
       game.style.display = "grid";
       let size = Math.ceil(Math.sqrt(numButtons));
       game.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+      game.style.gap = "10px"; 
     } else {
       // Random placement
       btn.style.position = "absolute";
@@ -87,7 +99,6 @@ function nextRound() {
     } else {
       btn.addEventListener("click", () => {
         // Redirect back to login screen
-        msg.textContent = "Access Denied! Try again.";
         gameScreen.style.display = "none";
         loginScreen.style.display = "block";
         posterScreen.style.display = "none";
@@ -98,10 +109,13 @@ function nextRound() {
     }
 
     // Moving drift after round 7
-    if (round >= 7) {
-      moveButton(btn);
+    if (round >= 7 && round < 9) {
+      moveButton2(btn);
+    } else if (round >= 9 && round < 12) {
+        moveButton(btn);
+    } else if (round >= 12) {
+      moveButtonSnake(btn);
     }
-
     game.appendChild(btn);
   }
 }
@@ -126,4 +140,53 @@ function moveButton(btn) {
   }
 
   animate();
+}
+
+function moveButton2(btn) {
+  let x = parseFloat(btn.style.left) || Math.random() * (game.clientWidth - 50);
+  let y = parseFloat(btn.style.top) || Math.random() * (game.clientHeight - 30);
+  // dx is always 0 for vertical movement
+  let dx = 0
+  let dy = (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 2);
+
+  function animate() {
+    x += dx;
+    y += dy;
+
+    if (x <= 0 || x >= game.clientWidth - btn.offsetWidth) dx *= -1;
+    if (y <= 0 || y >= game.clientHeight - btn.offsetHeight) dy *= -1;
+
+    btn.style.left = `${x}px`;
+    btn.style.top = `${y}px`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+function moveButtonSnake(btn) {
+  let x = parseFloat(btn.style.left) || Math.random() * 300;
+  let y = parseFloat(btn.style.top) || Math.random() * 300;
+  let dx = (Math.random() - 0.5) * 2; // horizontal speed
+  let dy = (Math.random() - 0.5) * 2; // vertical speed
+  let angle = Math.random() * Math.PI * 2;
+
+  function animate() {
+    
+    angle += 0.05;
+    x += dx + Math.sin(angle) * 2;
+    y += dy + Math.cos(angle) * 2;
+
+    // Keep inside the game area
+    if (x < 0 || x > game.clientWidth - btn.offsetWidth) dx *= -1;
+    if (y < 0 || y > game.clientHeight - btn.offsetHeight) dy *= -1;
+
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
 }
